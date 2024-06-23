@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.IO Example</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        // Connect to Socket.IO server
+        const socket = io();
+
+        // Example: Send message to server
+        function sendMessage() {
+            const message = document.getElementById('message').value;
+            socket.emit('chat message', message);
+        }
+
+        // Example: Listen for messages from server
+        socket.on('chat message', (msg) => {
+            const messagesList = document.getElementById('messages');
+            const li = document.createElement('li');
+            li.textContent = msg;
+            messagesList.appendChild(li);
+        });
+        socket.on('message', (msg) => {
+            const messagesList = document.getElementById('messages');
+            const li = document.createElement('li');
+            li.textContent = msg;
+            messagesList.appendChild(li);
+        });
+      
+      
+    </script>
+</head>
+<body>
+    <h1>Socket.IO Example</h1>
+    <ul id="messages"></ul>
+    <input id="message" type="text" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+</body>
+</html>
